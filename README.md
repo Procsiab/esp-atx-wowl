@@ -16,7 +16,7 @@ To correctly compile this program through Arduino IDE, you should install the fo
 - ESPAsyncWebServer
 - ArduinoJson
 - ESPConnect
-- AsyncElegantOTA
+- ElegantOTA
 - ESPDash
 - NTPClient
 
@@ -30,12 +30,12 @@ When powered for the first time, the ESP will spawn an access point with the nam
 
 After completing the configuration, the ESP will reboot and start serving a web interface on port 80 with a status indicator and two buttons.
 
-To update a new sketch on the air, follow the documentation for the component used to implement this function, [AsyncElegantOTA](https://randomnerdtutorials.com/esp8266-nodemcu-ota-over-the-air-arduino/).
+To update a new sketch on the air, follow the documentation for the component used to implement this function, [ElegantOTA](https://randomnerdtutorials.com/esp8266-nodemcu-ota-over-the-air-arduino/).
 
 # Warning
 
 The code inside this repo is for demonstration purposes and does not include any authentication mechanisms to protect the information and access to the device when deployed: follow the guidelines for the respective components to implement adequate authentication.
 
-- [Protect OTA firmware updates](https://github.com/ayushsharma82/AsyncElegantOTA#additional-security)
+- [Protect OTA firmware updates](https://docs.elegantota.pro/authentication/#example-usage)
 - [Protect the dashboard](https://docs.espdash.pro/features/authentication/)
 - [Protect the setup captive portal](https://github.com/ayushsharma82/ESPConnect#espconnectautoconnectconst-char-ssid-const-char-password-unsigned-long-timeout)

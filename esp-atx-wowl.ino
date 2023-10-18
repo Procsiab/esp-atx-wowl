@@ -18,14 +18,17 @@
 #include <ESPAsyncWebServer.h>
 
 #include <ESPConnect.h>
-#include <AsyncElegantOTA.h>
+#include <ElegantOTA.h>
 #include <ESPDash.h>
 
 #include <NTPClient.h>
 #include <WiFiUdp.h>
 
-#define FW_VERSION_NUM "1.0.0"
+#define FW_VERSION_NUM "1.2.0"
 #define WIFI_HOSTNAME "esp-atx-wowl"
+#define WEB_USER "management"
+#define OTA_PASSWD "suchsecret"
+#define DASH_PASSWD "verysecure"
 
 #define PWR_SW_PIN D5
 #define RST_PROBE_PIN D1
@@ -163,8 +166,11 @@ void setup(){
     }
   });
 
+  // Set Dashboard authentication
+  dashboard.setAuthentication(WEB_USER, DASH_PASSWD);
   // Inject the OTA web page endpoint
-  AsyncElegantOTA.begin(&server);
+  ElegantOTA.setAuth(WEB_USER, OTA_PASSWD);
+  ElegantOTA.begin(&server);
   // Run the async web server
   server.begin();
 
@@ -181,6 +187,9 @@ void setup(){
 }
 
 void loop(){
+  // Handle reboot after firmware upload
+  ElegantOTA.loop();
+  // Handle button press and power events
   if (is_btn_quick_pressed && switch_action_start_millis != 0 && millis() - switch_action_start_millis > quick_press_millis) {
     release_quick_power_button();
     Serial.println("[btn_quick] automatic release after quick delay");
